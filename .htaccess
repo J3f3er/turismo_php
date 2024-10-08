@@ -1,0 +1,12 @@
+# Habilita el motor de reescritura
+RewriteEngine On
+
+# Reescribe URLs para ocultar .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
+
+# Opcional: Reescribe URLs para ocultar .html y redirigir a .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)\.html$ $1.php [L]

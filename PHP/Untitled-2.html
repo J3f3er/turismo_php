@@ -1,0 +1,32 @@
+<form id="registroForm">
+    <input type="text" name="tNombre" placeholder="Nombre" required>
+    <input type="text" name="tApellido" placeholder="Apellido" required>
+    <input type="text" name="tUsuario" placeholder="Usuario" required>
+    <input type="email" name="tEmail" placeholder="Correo electrónico" required>
+    <input type="password" name="tUsuario_password" placeholder="Contraseña" required>
+    <button type="submit">Registrar</button>
+</form>
+
+<div id="registroMensaje"></div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#registroForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: 'registro.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        $('#registroMensaje').html('<p>' + response.success + '</p>');
+                    } else {
+                        $('#registroMensaje').html('<p>' + response.error + '</p>');
+                    }
+                }
+            });
+        });
+    });
+</script>

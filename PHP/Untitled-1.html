@@ -1,0 +1,31 @@
+<form id="loginForm">
+    <input type="text" name="tUsuario" placeholder="Usuario" required>
+    <input type="password" name="tUsuario_password" placeholder="Contraseña" required>
+    <label>
+        <input type="checkbox" name="remember"> Recordarme
+    </label>
+    <button type="submit">Login</button>
+</form>
+
+<div id="loginMensaje"></div>
+
+<script>
+    $(document).ready(function() {
+        $('#loginForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: 'login.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        $('#loginMensaje').html('<p>' + response.success + '</p>');
+                    } else {
+                        $('#loginMensaje').html('<p>' + response.error + '</p>');
+                    }
+                }
+            });
+        });
+    });
+</script>
